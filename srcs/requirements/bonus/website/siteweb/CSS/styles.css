@@ -1,0 +1,262 @@
+
+body 
+{
+	background-color:darkgoldenrod;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+	/* display: flex; */
+	/* justify-content: center	; */
+	margin: 0 auto;
+}
+
+
+header.first
+{
+	width:100vw;
+	height: 8vh;
+	display:flex;
+	background-color:darkgoldenrod;
+}
+
+header.first img
+{
+	padding-left: 2vw;
+	padding-right: 2vw;
+	height: 8vh;
+}
+
+
+nav.Onglets 
+{
+	align-items: center;
+	display:flex;
+	list-style:none;
+	color: white;
+	background-color: black;
+	width: 100vw;
+	padding-left: 10vw;
+	justify-content: space-around;
+}
+
+nav.Onglets a
+{
+	color: white;
+}
+
+div.landing_page h1
+{
+	color: white;
+	font-size: 4vw;
+	background: url("C:/Users/William/Desktop/siteweb/img/Palme_d\'Or_gold_silhouette.jpg");
+	/* background-size: cover; */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100vh;
+	text-align: center;
+	margin-top: 2vw;
+}
+div.landing_page img
+{
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	height: 75%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Produits */
+
+div.produits_page
+{
+	/* display: flex; */
+	background: url("/img/Palme_d\'Or_gold_silhouette.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100vh;
+	/* justify-content: flex-start; */
+	/* align-items: center; */
+	height: 100vh;
+}
+
+div.produits_page h1
+{
+	color: white;
+	font-size: 4vw;
+	text-align: center;
+	margin-top: 2vw;
+}
+
+
+div.produits_page img
+{
+	margin-top: 0vh;
+	width: 10vw;
+	/* height: 40vh; */
+	margin-left: 4vw;
+}
+
+div.produits_page h3
+{
+	color: black;
+	/* padding-left: 5vw; */
+	padding: 5vw;
+}
+
+div.liste_items
+{
+	display: flex;
+	justify-content: space-evenly;
+	width: 100vw;
+	flex-direction: row;
+	flex-wrap: wrap;
+	/* background-color: white; */
+	align-items: center;
+}
+
+div.liste_items h2
+{
+	padding-top: 1vh;
+	color: black;
+	text-align: center;
+}
+
+div.liste_items a
+{
+	margin-top: 2vh;
+	background-color: gold;
+	width: 18vw;
+	height: 60vh;
+	text-decoration: none;
+}
+
+
+
+
+/* BAGUES */
+
+div.produits_page_bague
+{
+	display: flex;
+	flex-direction: column;
+	background: url("/img/Palme_d\'Or_gold_silhouette.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100vh;
+	align-items: center;
+	height: 100vh;
+}
+
+div.produits_page_bague h1
+{
+	color: black;
+	font-size: 4vw;
+	text-align: center;
+	margin-top: 2vw;
+}
+
+
+div.produits_page_bague img
+{
+	margin-top: 0vh;
+	width: 10vw;
+	/* height: 40vh; */
+	margin-left: 4vw;
+}
+
+body a.instagram
+{
+	margin-top: 5vh;
+	/* background-color: pink; */
+	/* position: absolute; */
+	color: white;
+	font-size: 3vw;
+}
+
+div.arrows
+{
+	padding-top: 8vh;
+	width: 80vw;
+	/* background-color: black; */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+div.produits_page_bague a.Retour
+{
+	/* background-color: red; */
+	color: wheat;
+	/* padding-top: -5vh; */
+	font-size: 4vw;
+	/* text-align: center; */
+	margin-top: 1vw;
+}
+
+
+
+
+
+/* Item 0001 - Boucle d'Oreille Argent */
+
+div.item
+{
+	margin-left: 30vw;
+	margin-right: 30vw;
+	padding: 5vh;
+	justify-content: center;
+	background-color: wheat;
+	display: flex;
+	align-items: center;
+}
+
+div.item img
+{
+	margin-left: 10vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* arbesa */
+
+body.arbesa
+{
+	display: flex;
+	background-color:red;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+	align-items: center;
+	margin: 0 auto;
+}
+
+body.arbesa H1
+
+body.arbesa img
+{
+	height: 100vh;
+}

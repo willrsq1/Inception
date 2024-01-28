@@ -5,14 +5,31 @@ services:
     container_name: nginx
     depends_on:
       - wordpress
+      - website
     build:
       context: ./requirements/nginx/
       dockerfile: Dockerfile
     image: nginx
     ports:
       - 443:443
+      - 8080:8080
     volumes:
       - wordpress_data:/var/www/html
+      - website_data:/var/www/website
+    restart: always
+    networks:
+      - network
+    env_file:
+      - .env
+
+  website:
+    container_name: website
+    image: website
+    build:
+      context: ./requirements/bonus/website/
+      dockerfile: Dockerfile
+    volumes:
+      - website_data:/var/www/website
     restart: always
     networks:
       - network
@@ -24,7 +41,7 @@ services:
     build:
       context: ./requirements/mariadb/
       dockerfile: Dockerfile
-    image: mariadb:10.8.2
+    image: mariadb
     env_file: .env
     environment:
              - MYSQL_HOSTNAME=$MYSQL_HOSTNAME
@@ -72,6 +89,13 @@ volumes:
       type: none
       o: bind
       device: /home/wruet-su/data/mariadb
+  website_data:
+    name: website
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/wruet-su/data/website
 
 
 # docker stop $(docker ps -aq) && docker rm $(docker ps -aq)

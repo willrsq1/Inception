@@ -3,6 +3,7 @@ all: up
 up:
 	sudo mkdir -p /home/wruet-su/data/mariadb
 	sudo mkdir -p /home/wruet-su/data/wordpress
+	sudo mkdir -p /home/wruet-su/data/website
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 down:
 	docker-compose -f ./srcs/docker-compose.yml  down
@@ -14,6 +15,7 @@ fclean:
 		docker network rm `docker network ls -q`; echo "DONE";
 	sudo rm -rf /home/wruet-su/data/mariadb
 	sudo rm -rf /home/wruet-su/data/wordpress
+	sudo rm -rf /home/wruet-su/data/website
 mysql:
 	docker exec -it mariadb mysql -u root -p
 re: down fclean up
