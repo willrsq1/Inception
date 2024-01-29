@@ -12,6 +12,7 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
 COPY tools/wordpress.sh /tmp
+COPY conf/wp-config.php /tmp/wp-config.php
 RUN chmod +x /tmp/wordpress.sh
 EXPOSE 9000
 CMD ["sh", "/tmp/wordpress.sh"]

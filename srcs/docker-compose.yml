@@ -1,4 +1,37 @@
 version: '3.7'
+  
+networks:
+  network:
+    driver: bridge
+
+
+  
+volumes:
+
+  wordpress_data:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/wruet-su/data/wordpress
+
+  mariadb_data:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/wruet-su/data/mariadb
+
+  website_data:
+    name: website
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/wruet-su/data/website
+
 
 services:
   nginx:
@@ -22,6 +55,36 @@ services:
     env_file:
       - .env
 
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb/
+      dockerfile: Dockerfile
+    image: mariadb
+    env_file: .env
+    networks:
+      - network
+    restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+      - rediscache
+    build:
+      context: ./requirements/wordpress/
+      dockerfile: Dockerfile
+    image: wordpress
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
+
   website:
     container_name: website
     image: website
@@ -36,67 +99,29 @@ services:
     env_file:
       - .env
 
-  mariadb:
-    container_name: mariadb
+  adminer:
+    container_name: adminer
+    image: adminer
     build:
-      context: ./requirements/mariadb/
+      context: ./requirements/bonus/adminer/
       dockerfile: Dockerfile
-    image: mariadb
-    env_file: .env
-    environment:
-             - MYSQL_HOSTNAME=$MYSQL_HOSTNAME
-             - MYSQL_DATABASE=$MYSQL_DATABASE
-             - MYSQL_USER=$MYSQL_USER
-             - MYSQL_PASSWORD=$MYSQL_PASSWORD
-             - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    restart: always
+    ports:
+      - 8081:8080
     networks:
       - network
-    restart: always
-    volumes:
-      - mariadb_data:/var/lib/mysql
 
-  wordpress:
-    container_name: wordpress
-    depends_on:
-      - mariadb
+  rediscache:
+    container_name: rediscache
+    image: redis
     build:
-      context: ./requirements/wordpress/
+      context: ./requirements/bonus/rediscache/
       dockerfile: Dockerfile
-    image: wordpress
     restart: always
-    env_file:
-      - .env
-    volumes:
-      - wordpress_data:/var/www/html
+    ports:
+      - 6379:6379
     networks:
       - network
-    
-networks:
-  network:
-    driver: bridge
-volumes:
-  wordpress_data:
-    name: wordpress
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wruet-su/data/wordpress
-  mariadb_data:
-    name: mariadb
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wruet-su/data/mariadb
-  website_data:
-    name: website
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wruet-su/data/website
-
 
 # docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 # https://www.hostinger.fr/tutoriels/wp-cli
