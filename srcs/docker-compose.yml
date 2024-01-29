@@ -32,14 +32,6 @@ volumes:
       o: bind
       device: /home/wruet-su/data/website
 
-  ftp_data:
-    name: ftp
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/wruet-su/data/ftp
-
 
 services:
   nginx:
