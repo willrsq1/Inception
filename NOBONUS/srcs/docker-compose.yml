@@ -1,0 +1,99 @@
+version: '3.7'
+
+networks:
+
+  network:
+        driver: bridge
+
+volumes:
+
+  volume_Wordpress:
+
+        name: wordpress
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: /home/wruet-su/data/wordpress
+
+  volume_mariaDB:
+
+        name: mariaDB
+        driver: local
+        driver_opts:
+          type: none
+          o: bind
+          device: /home/wruet-su/data/mariaDB
+
+services:
+
+  mariadb:
+
+        container_name: mariadb
+
+        build:
+          context: ./requirements/mariadb/
+          dockerfile: Dockerfile
+
+        image: mariadb
+
+        env_file: .env
+
+        networks:
+          - network
+
+        restart: always
+
+        volumes:
+          - volume_mariaDB:/var/lib/mysql
+
+  wordpress:
+
+        container_name: wordpress
+
+        depends_on:
+          - mariadb
+
+        build:
+          context: ./requirements/wordpress/
+          dockerfile: Dockerfile
+
+        image: wordpress
+
+        env_file: .env
+
+        networks:
+          - network
+
+        restart: always
+
+        volumes:
+          - volume_Wordpress:/var/www/html
+
+  nginx:
+
+        container_name: nginx
+
+        depends_on:
+          - wordpress
+
+        build:
+          context: ./requirements/nginx/
+          dockerfile: Dockerfile
+
+        image: nginx
+
+        env_file: .env
+
+        ports:
+          - 443:443
+
+        volumes:
+          - volume_Wordpress:/var/www/html
+
+        restart: always
+
+        networks:
+          - network
+
+# echo "127.0.0.1       wruet-su.42.fr" >> /etc/hosts to get on right ip
