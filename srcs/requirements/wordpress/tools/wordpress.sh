@@ -23,11 +23,15 @@ while [ $? -ne 0 ]; do
 done
 
 wp user create --path="/var/www/html/wordpress" --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD
-
+#redis
 wp plugin install redis-cache --activate --path="/var/www/html/wordpress" --allow-root
 wp plugin activate redis-cache --path="/var/www/html/wordpress" --allow-root
 wp redis enable --path="/var/www/html/wordpress" --allow-root
 
+#query
+
+wp plugin install query-monitor --activate --path="/var/www/html/wordpress" --allow-root
+wp plugin activate query-monitor --path="/var/www/html/wordpress" --allow-root
 
 chown www-data:www-data /var/www/html/wordpress/wp-content/uploads -R
 mkdir -p /run/php/

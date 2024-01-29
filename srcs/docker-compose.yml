@@ -32,6 +32,14 @@ volumes:
       o: bind
       device: /home/wruet-su/data/website
 
+  ftp_data:
+    name: ftp
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/wruet-su/data/ftp
+
 
 services:
   nginx:
@@ -122,6 +130,39 @@ services:
       - 6379:6379
     networks:
       - network
+
+  ftp-serv:
+    container_name: ftp-serv
+    build:
+      context: ./requirements/bonus/ftp-serv/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - nginx
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    volumes:
+      - wordpress_data:/home/william1
+    networks:
+      - network
+
+  query:
+    container_name: query
+    build:
+      context: ./requirements/bonus/query/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    ports:
+      - 50000:50000
+      - 8082:8080
+    networks:
+      - network
+
 
 # docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 # https://www.hostinger.fr/tutoriels/wp-cli
