@@ -1,9 +1,9 @@
 all: up
 
 up:
-	sudo mkdir -p /home/wruet-su/data/mariadb
-	sudo mkdir -p /home/wruet-su/data/wordpress
-	sudo mkdir -p /home/wruet-su/data/website
+	mkdir -p $(HOME)/data/mariadb
+	mkdir -p $(HOME)/data/wordpress
+	mkdir -p $(HOME)/data/website
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 down:
 	docker-compose -f ./srcs/docker-compose.yml  down
@@ -13,9 +13,9 @@ fclean:
 	docker stop `docker ps -qa`; docker rm `docker ps -aq`; \
 		docker rmi -f `docker images -qa`;docker volume rm `docker volume ls -q`; \
 		docker network rm `docker network ls -q`; echo "DONE";
-	sudo rm -rf /home/wruet-su/data/mariadb
-	sudo rm -rf /home/wruet-su/data/wordpress
-	sudo rm -rf /home/wruet-su/data/website
+	rm -rf $(HOME)/wruet-su/data/mariadb
+	rm -rf $(HOME)/wruet-su/data/wordpress
+	rm -rf $(HOME)/wruet-su/data/website
 mysql:
 	docker exec -it mariadb mysql -u root -p
 re: down fclean up
