@@ -6,12 +6,9 @@ You will virtualize several Docker images, creating them in your new personal vi
 ### Discription of mandatory part
 This project consists in having you set up a small infrastructure composed of different services under specific rules.
 
-<img align="left" src="img/docker.svg" height="70">
-<img align="left" src="img/mariadb.svg" height="70">
-<img align="left" src="img/wordpress.svg" height="70">
-<img align="left" src="img/nginx.svg" height="70">
+![image](https://github.com/willrsq1/Inception/assets/117649637/dfe5402b-d953-4971-a5d4-febaa2a4e0bd)
 
-![basic](img/basic.png)
+![basic](https://github.com/willrsq1/Inception/assets/117649637/b8d53546-e488-435a-b0ca-cdb90a60da78)
 
 #### Rules:
 - This project need to be done on a Virtual Machine.
@@ -46,10 +43,8 @@ __The bonus part will only be assessed if the mandatory part is PERFECT. Perfect
 
 A `Dockerfile` must be written for each extra service. Thus, each one of them will run inside its own container and will have, if necessary, its dedicated volume.
 
-<img align="left" src="img/redis.svg" height="70">
-<img align="left" src="img/ftp.svg" height="70">
-<img align="left" src="img/adminer.svg" height="70">
-<img align="left" src="img/portainer.svg" height="70">
+![image](https://github.com/willrsq1/Inception/assets/117649637/6773e9ac-7857-49ec-97c4-56ae54a124ff)
+
 <br><br><br>
 
 #### Tasks:
